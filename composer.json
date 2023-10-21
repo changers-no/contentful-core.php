@@ -2,6 +2,7 @@
     "name": "changers-no/contentful-core",
     "type": "library",
     "description": "Foundation library for Contentful PHP SDKs",
+    "minimum-stability": "dev",
     "require": {
         "php": "^8.2",
         "ext-json": "*",
