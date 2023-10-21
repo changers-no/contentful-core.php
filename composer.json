@@ -1,5 +1,5 @@
 {
-    "name": "contentful/core",
+    "name": "changers-no/contentful-core",
     "type": "library",
     "description": "Foundation library for Contentful PHP SDKs",
     "require": {
