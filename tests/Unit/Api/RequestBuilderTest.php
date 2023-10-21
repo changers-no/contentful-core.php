@@ -53,7 +53,7 @@ class RequestBuilderTest extends TestCase
         $this->assertSame('application/json', $builtRequest->getHeaderLine('Accept'));
         $this->assertSame('gzip', $builtRequest->getHeaderLine('Accept-Encoding'));
         $this->assertSame('Bearer <accessToken>', $builtRequest->getHeaderLine('Authorization'));
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^sdk contentful-core.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $builtRequest->getHeaderLine('X-Contentful-User-Agent')
         );

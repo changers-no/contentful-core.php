@@ -66,7 +66,7 @@ class BaseClientTest extends TestCase
         $this->assertCount(2, $logs);
 
         $this->assertSame('INFO', $logs[0]['level_name']);
-        $this->assertRegExp('/GET https\:\/\/cdn\.contentful\.com\/spaces\/cfexampleapi \(([0-9]{1,})\.([0-9]{3})s\)/', $logs[0]['message']);
+        $this->assertMatchesRegularExpression('/GET https\:\/\/cdn\.contentful\.com\/spaces\/cfexampleapi \(([0-9]{1,})\.([0-9]{3})s\)/', $logs[0]['message']);
 
         $this->assertSame('DEBUG', $logs[1]['level_name']);
         $context = $logs[1]['context'];
@@ -91,7 +91,7 @@ class BaseClientTest extends TestCase
         // To get the original request, use a Message object retrieved from BaseClient::getMessages().
         $this->assertSame('http://cdn.contentful.com/spaces/cfexampleapi', (string) $request->getUri());
         $this->assertSame('Bearer b4c0n73n7fu1', $request->getHeaderLine('Authorization'));
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^app sdk-test-application\/1.0; sdk contentful-core.php\/(dev-master|[0-9\.]*(-(dev|beta|alpha|RC))?); platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $request->getHeaderLine('X-Contentful-User-Agent')
         );
@@ -151,7 +151,7 @@ class BaseClientTest extends TestCase
             $this->assertSame('https://www.example.com/custom-url?someVar=someValue&anotherVar=anotherValue', (string) $exceptionRequest->getUri());
             $this->assertSame('Awesome', $exceptionRequest->getHeaderLine('X-Contentful-Is'));
             $this->assertSame('application/vnd.contentful.management.v1+json', $exceptionRequest->getHeaderLine('Content-Type'));
-            $this->assertRegExp(
+            $this->assertMatchesRegularExpression(
                 '/^integration sdk-test-integration\/1.0.0-beta; sdk contentful-core.php\/(dev-master|[0-9\.]*(-(dev|beta|alpha|RC))?); platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
                 $exceptionRequest->getHeaderLine('X-Contentful-User-Agent')
             );
@@ -179,7 +179,7 @@ class BaseClientTest extends TestCase
         $request = $client->getMessages()[0]->getRequest();
         // When the current package name is invalid,
         // the version will automatically be set to 0.0.0-alpha
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/sdk invalid\/0.0.0-alpha; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $request->getHeaderLine('X-Contentful-User-Agent')
         );
@@ -196,7 +196,7 @@ class BaseClientTest extends TestCase
         $client->callApi('GET', '/');
 
         $request = $client->getMessages()[0]->getRequest();
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^app the-example-app\/1.0.0; sdk contentful-core.php\/(dev-master|[0-9\.]*(-(dev|beta|alpha|RC))?); platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $request->getHeaderLine('X-Contentful-User-Agent')
         );
@@ -205,7 +205,7 @@ class BaseClientTest extends TestCase
         $client->callApi('GET', '/');
 
         $request = $client->getMessages()[1]->getRequest();
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^app the-example-app\/0.0.0-alpha; sdk contentful-core.php\/(dev-master|[0-9\.]*(-(dev|beta|alpha|RC))?); platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $request->getHeaderLine('X-Contentful-User-Agent')
         );
@@ -222,7 +222,7 @@ class BaseClientTest extends TestCase
         $client->callApi('GET', '/');
 
         $request = $client->getMessages()[0]->getRequest();
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^integration contentful.symfony\/0.0.0-alpha; sdk contentful-core.php\/(dev-master|[0-9\.]*(-(dev|beta|alpha|RC))?); platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $request->getHeaderLine('X-Contentful-User-Agent')
         );

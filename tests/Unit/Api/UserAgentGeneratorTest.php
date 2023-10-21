@@ -20,7 +20,7 @@ class UserAgentGeneratorTest extends TestCase
     {
         $generator = new UserAgentGenerator('contentful.php', '0.6.2-beta');
 
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
@@ -32,21 +32,21 @@ class UserAgentGeneratorTest extends TestCase
 
         // Just the app name
         $generator->setApplication('TestApp');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^app TestApp; sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
 
         // With a version
         $generator->setApplication('TestApp', '3.3.7');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^app TestApp\/3.3.7; sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
 
         // Reset the app
         $generator->setApplication('');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
@@ -58,21 +58,21 @@ class UserAgentGeneratorTest extends TestCase
 
         // Just the integration name
         $generator->setIntegration('SomeIntegration');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^integration SomeIntegration; sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
 
         // With a version
         $generator->setIntegration('SomeIntegration', '2.1.3-beta');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^integration SomeIntegration\/2.1.3-beta; sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
 
         // Reset the integration
         $generator->setIntegration('');
-        $this->assertRegExp(
+        $this->assertMatchesRegularExpression(
             '/^sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
@@ -84,9 +84,8 @@ class UserAgentGeneratorTest extends TestCase
 
         $generator
             ->setApplication('TestApp', '3.3.7')
-            ->setIntegration('SomeIntegration', '2.1.3-beta')
-        ;
-        $this->assertRegExp(
+            ->setIntegration('SomeIntegration', '2.1.3-beta');
+        $this->assertMatchesRegularExpression(
             '/^app TestApp\/3.3.7; integration SomeIntegration\/2.1.3-beta; sdk contentful.php\/[0-9\.]*(-(dev|beta|alpha|RC))?; platform PHP\/[0-9\.]*; os (Windows|Linux|macOS);$/',
             $generator->getUserAgent()
         );
