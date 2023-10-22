@@ -3,10 +3,15 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased](https://github.com/contentful/contentful-core.php/compare/4.0.0...HEAD)
+## [Unreleased](https://github.com/changers-no/contentful-core.php/compare/1.0.0...HEAD)
 
 <!-- PENDING-CHANGES -->
+> No meaningful changes since last release.
 <!-- /PENDING-CHANGES -->
+
+## [1.0.0](https://github.com/changers-no/contentful-core.php/tree/1.0.0) (2023-10-22)
+
+
 
 ## [4.0.0](https://github.com/contentful/contentful-core.php/tree/4.0.0) (2022-12-05)
 
